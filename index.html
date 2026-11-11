@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#fffaf2">
+  <meta name="description" content="Большой Джон — доставка пиццы, суши, роллов и закусок в Донецке. Закажите онлайн.">
+  <title>Большой Джон — пиццерия в Донецке</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #111111;
+      --muted: #55545a;
+      --orange: #ff9f0a;
+      --orange-dark: #d97700;
+      --cream: #fffaf2;
+      --line: #f0e2cf;
+      --panel: rgba(255, 251, 244, .88);
+    }
+    * { box-sizing: border-box; }
+    html { min-width: 320px; scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      background:
+        radial-gradient(ellipse at 50% -12%, rgba(255, 195, 88, .14), transparent 36rem),
+        linear-gradient(180deg, #fffdf9 0%, #fffaf2 80%, #fff8ef 100%);
+      overflow-x: hidden;
+      font-family: "Segoe UI", Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
+    .site-shell { width: min(100% - 56px, 1760px); margin-inline: auto; }
+    .site-header {
+      min-height: 150px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      position: relative;
+      z-index: 2;
+    }
+    .brand { display: inline-flex; align-items: center; gap: 13px; text-decoration: none; }
+    .brand-mark { width: 112px; height: 112px; flex: none; object-fit: contain; border-radius: 50%; mix-blend-mode: multiply; }
+    .brand-name { display: flex; flex-direction: column; line-height: .94; }
+    .brand-name strong { color: #17130e; font-size: clamp(22px, 1.9vw, 29px); font-weight: 900; letter-spacing: -.045em; }
+    .address-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 13px 22px;
+      border: 1px solid rgba(176, 132, 79, .09);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .8);
+      box-shadow: 0 8px 28px rgba(98, 71, 42, .08);
+      font-size: 15px;
+      text-decoration: none;
+    }
+    .address-pill svg { width: 23px; height: 23px; color: var(--orange-dark); flex: none; }
+    main { overflow: hidden; }
+    .hero { 
+      position: relative;
+      min-height: clamp(650px, 42vw, 900px);
+      display: flex;
+      align-items: center;
+      padding: 26px 0 50px;
+      isolation: isolate;
+      background:
+        radial-gradient(ellipse at 82% 48%, rgba(255, 183, 48, .2), transparent 38%),
+        radial-gradient(ellipse at 68% 88%, rgba(193, 96, 26, .09), transparent 34%),
+        linear-gradient(135deg, rgba(255, 255, 255, .44), rgba(255, 247, 230, .26));
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      width: 33%;
+      height: 120%;
+      top: -21%;
+      left: 28%;
+      border-radius: 45% 0 58% 35%;
+      background: linear-gradient(145deg, rgba(255, 225, 173, .54), rgba(255, 239, 211, .08));
+      transform: rotate(17deg);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      top: 7%;
+      right: 3%;
+      width: 58%;
+      height: 86%;
+      border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(255, 183, 48, .2), rgba(255, 226, 172, .12) 48%, transparent 72%);
+      filter: blur(18px);
+      pointer-events: none;
+    }
+    .hero-copy { width: 100%; position: relative; z-index: 1; padding: 18px 0 26px 10px; }
+    .hero-copy > :not(.hero-photo) { position: relative; z-index: 1; }
+    .category-ribbon {
+      display: inline-block;
+      max-width: min(62%, 850px);
+      padding: 12px 20px;
+      border-radius: 999px;
+      background: #fff4e2;
+      color: #ba5d00;
+      font-size: 13px;
+      font-weight: 750;
+      letter-spacing: .035em;
+      transform: rotate(-2deg);
+    }
+    h1 {
+      margin: 37px 0 16px;
+      max-width: 62%;
+      font-size: clamp(96px, 10.5vw, 190px);
+      line-height: .9;
+      font-weight: 950;
+      letter-spacing: -.08em;
+    }
+    h1 span { display: block; color: var(--orange); }
+    .tagline { max-width: min(42%, 660px); margin: 26px 0 31px; font-size: clamp(24px, 2.25vw, 40px); line-height: 1.28; letter-spacing: -.035em; }
+    .tagline .heart { color: var(--orange); }
+    .hero-photo {
+      position: absolute;
+      z-index: 0;
+      top: -4%;
+      right: -2%;
+      width: 64%;
+      height: 108%;
+      overflow: hidden;
+      pointer-events: none;
+      -webkit-mask-image: radial-gradient(ellipse 76% 72% at 57% 48%, #000 46%, rgba(0,0,0,.86) 64%, rgba(0,0,0,.44) 82%, transparent 100%);
+      mask-image: radial-gradient(ellipse 76% 72% at 57% 48%, #000 46%, rgba(0,0,0,.86) 64%, rgba(0,0,0,.44) 82%, transparent 100%);
+    }
+    .hero-photo::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, var(--cream) 0%, rgba(255,250,242,.76) 7%, transparent 25%),
+        linear-gradient(90deg, rgba(255,250,242,.9) 0%, transparent 24%, transparent 76%, rgba(255,250,242,.58) 92%, var(--cream) 100%),
+        linear-gradient(0deg, var(--cream) 0%, transparent 22%);
+      pointer-events: none;
+    }
+    .hero-photo img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: 70% center; }
+    .benefits { width: min(760px, 58%); display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+    .benefit {
+      min-height: 134px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 13px 8px;
+      border: 1px solid rgba(255,255,255,.8);
+      border-radius: 24px;
+      background: var(--panel);
+      box-shadow: 0 10px 28px rgba(117, 79, 36, .07);
+      text-align: center;
+      font-size: 14px;
+      font-weight: 650;
+      line-height: 1.28;
+      backdrop-filter: blur(10px);
+    }
+    .benefit svg { width: 44px; height: 44px; color: var(--orange-dark); stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .cta-block { margin: 34px 0 0 8%; text-align: center; width: min(620px, 50%); }
+    .menu-link {
+      min-height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+      padding: 18px 30px;
+      border: 0;
+      border-radius: 999px;
+      background: linear-gradient(100deg, #ffb81c, #ffae13 52%, #ffb91d);
+      box-shadow: 0 14px 32px rgba(209, 126, 0, .22), inset 0 1px rgba(255,255,255,.5);
+      color: #17120a;
+      font-size: clamp(19px, 2.4vw, 28px);
+      font-weight: 800;
+      text-decoration: none;
+      transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
+    }
+    .menu-link:hover { transform: translateY(-3px); box-shadow: 0 19px 38px rgba(209, 126, 0, .29); filter: saturate(1.05); }
+    .menu-link:focus-visible, .social-link:focus-visible, .phone:focus-visible, .address-pill:focus-visible { outline: 3px solid #914b00; outline-offset: 4px; }
+    .menu-link svg { width: 34px; height: 34px; flex: none; }
+    .redirect-note { margin: 13px 0 0; color: var(--muted); font-size: 14px; }
+    .site-footer {
+      min-height: 124px;
+      max-width: 1600px;
+      margin-inline: auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr auto;
+      align-items: center;
+      gap: 22px;
+      padding: 8px 20px 28px;
+    }
+    .footer-item { display: flex; align-items: center; gap: 14px; min-width: 0; }
+    .footer-item + .footer-item { border-left: 1px solid #efd4af; padding-left: 26px; }
+    .footer-item svg { width: 39px; height: 39px; flex: none; color: var(--orange-dark); stroke: currentColor; fill: none; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+    .footer-item strong, .footer-item span { display: block; }
+    .footer-item strong { margin-bottom: 5px; font-size: 15px; }
+    .footer-item span { color: var(--muted); font-size: 14px; }
+    .phone { text-decoration: none; font-weight: 700; color: var(--ink) !important; }
+    .socials { display: flex; align-items: center; gap: 12px; }
+    .social-link { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 15px; background: #179bd7; color: white; text-decoration: none; transition: transform .18s ease; }
+    .social-link:hover { transform: translateY(-3px); }
+    .social-link.vk { background: #3975be; }
+    .social-link.instagram { background: linear-gradient(145deg, #8146c9, #e1306c 55%, #ff8b43); }
+    .social-link svg { width: 24px; height: 24px; fill: currentColor; }
+
+    .promotions { padding: 45px 0 72px; }
+    .promotions-heading { max-width: 760px; margin: 0 auto 28px; text-align: center; }
+    .promotions-heading .eyebrow { display: inline-flex; align-items: center; margin: 0 0 10px; padding: 7px 12px; border: 1px solid rgba(177,39,33,.12); border-radius: 999px; background: #fff0e7; color: #a82722; font-size: 11px; font-weight: 850; letter-spacing: .13em; text-transform: uppercase; }
+    .promotions-heading h2 { margin: 0; color: #281b13; font-size: clamp(34px, 4vw, 58px); line-height: 1; letter-spacing: -.055em; }
+    .promotions-heading h2::after { content: ""; display: block; width: 56px; height: 4px; margin: 13px auto 0; border-radius: 999px; background: linear-gradient(90deg, #b82620 0 48%, #f1a41d 48% 100%); }
+    .promotions-heading > p:last-child { margin: 13px 0 0; color: var(--muted); font-size: 16px; }
+    .promotion-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+    .promotion-card { min-height: 350px; position: relative; display: flex; flex-direction: column; overflow: hidden; padding: 20px; border: 1px solid rgba(199,143,71,.38); border-radius: 28px; background: linear-gradient(145deg, #453020, #201712 72%); color: white; box-shadow: 0 18px 42px rgba(74,45,21,.14); isolation: isolate; }
+    .promotion-card::before { content: ""; position: absolute; z-index: -1; inset: 0; background: linear-gradient(180deg, rgba(16,10,7,.48) 0%, rgba(16,10,7,.05) 34%, rgba(16,10,7,.38) 58%, rgba(16,10,7,.94) 100%); }
+    .promotion-card.tuesday { background-color: #283127; } .promotion-card.wednesday { background-color: #503514; } .promotion-card.thursday { background-color: #49251d; }
+    .promo-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; position: relative; z-index: 1; }
+    .promo-day { font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+    .promo-mark { padding: 7px 10px; border: 1px solid rgba(255,255,255,.24); border-radius: 999px; background: #b92721; box-shadow: 0 4px 12px rgba(42,12,9,.18); font-size: 10px; font-weight: 900; letter-spacing: .06em; text-transform: uppercase; }
+    .promo-image { position: absolute; z-index: -2; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .4s ease; }
+    .promotion-card:hover .promo-image { transform: scale(1.035); }
+    .promo-copy { margin-top: auto; position: relative; z-index: 1; }
+    .promo-kicker { margin: 0 0 8px; color: #ffd38b; font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+    .promo-copy h3 { max-width: 95%; margin: 0 0 7px; font-size: clamp(23px, 2vw, 31px); line-height: 1.05; letter-spacing: -.035em; }
+    .promo-copy > p:not(.promo-kicker) { max-width: 290px; margin: 0; color: rgba(255,255,255,.82); font-size: 13px; line-height: 1.45; }
+    .promo-price { display: flex; align-items: baseline; gap: 10px; margin-top: 14px; }
+    .promo-price del { color: rgba(255,255,255,.58); font-size: 14px; }
+    .promo-price strong { color: #fff; font-size: clamp(21px, 2vw, 30px); font-weight: 950; letter-spacing: -.04em; }
+    .promo-footnote { margin: 15px 0 0; color: #82786e; font-size: 12px; text-align: center; }
+    @media (max-width: 1200px) { .promotion-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .promotion-card { min-height: 320px; } }
+    @media (max-width: 560px) { .promotions { padding: 30px 0 45px; } .promotions-heading { margin-bottom: 20px; } .promotions-heading > p:last-child { font-size: 14px; } .promotion-grid { grid-template-columns: 1fr; gap: 12px; } .promotion-card { min-height: 295px; padding: 18px; border-radius: 24px; }  .promo-copy h3 { font-size: 27px; } }
+    .copyright { padding: 0 0 18px; color: #81796f; text-align: center; font-size: 12px; }
+    /* Large screens and wide cinema displays */
+    @media (min-width: 1440px) {
+      .site-shell { width: min(92%, 2100px); }
+      .site-header { min-height: clamp(132px, 11vh, 176px); }
+      .hero { min-height: min(78vh, 940px); }
+      .hero-photo { right: 0; width: min(64%, 1320px); height: 110%; }
+      .hero-copy { padding-left: clamp(0px, 1vw, 20px); }
+      .category-ribbon { max-width: 60%; font-size: clamp(14px, .9vw, 18px); }
+      .tagline { max-width: min(46%, 760px); font-size: clamp(32px, 2.2vw, 42px); }
+      .benefits { width: min(900px, 55%); gap: 14px; }
+      .benefit { min-height: 142px; }
+      .cta-block { width: min(700px, 48%); }
+    }
+    /* Standard 16:9 desktops: keep the hero balanced within the viewport height */
+    @media (min-width: 1800px) and (max-aspect-ratio: 2 / 1) {
+      .site-shell { width: min(90%, 1960px); }
+      .hero { min-height: min(82vh, 900px); }
+      .hero-photo { width: 62%; height: 108%; }
+      .tagline { max-width: min(45%, 780px); font-size: clamp(36px, 2.15vw, 46px); }
+      .benefits { width: min(900px, 54%); }
+      .site-footer { max-width: 1760px; }
+    }
+    /* 21:9 and wider: use the extra width while keeping the page vertically compact */
+    @media (min-width: 1800px) and (min-aspect-ratio: 2 / 1) {
+      .site-shell { width: min(92%, 2400px); }
+      .hero { min-height: min(72vh, 900px); }
+      .hero-photo { right: 0; width: 60%; height: 116%; top: -6%; }
+      .tagline { max-width: min(42%, 880px); font-size: clamp(38px, 1.8vw, 54px); }
+      .benefits { width: min(980px, 49%); }
+      .cta-block { width: min(760px, 46%); }
+      .promotion-card { min-height: 360px; }
+    }
+    /* Medium desktop and landscape tablet */
+    @media (min-width: 901px) and (max-width: 1439px) {
+      .site-shell { width: min(calc(100% - 48px), 1320px); }
+      .site-header { min-height: 126px; }
+      .brand-mark { width: 98px; height: 98px; }
+      .brand-name strong { font-size: 27px; }
+      .hero { min-height: clamp(620px, 62vw, 760px); }
+      .hero-photo { width: 59%; height: 100%; top: 0; right: 0; }
+      .category-ribbon { max-width: 70%; }
+      .tagline { max-width: 48%; font-size: clamp(25px, 2.5vw, 34px); }
+      .benefits { width: min(620px, 59%); gap: 9px; }
+      .benefit { min-height: 116px; padding-inline: 6px; }
+      .cta-block { margin-left: 2%; width: min(540px, 56%); }
+    }
+    /* Tablets */
+    @media (min-width: 561px) and (max-width: 900px) {
+      .site-shell { width: min(calc(100% - 40px), 760px); }
+      .site-header { min-height: 104px; }
+      .brand { gap: 9px; }
+      .brand-mark { width: 70px; height: 70px; }
+      .brand-name strong { font-size: 21px; }
+      .address-pill { max-width: 52%; padding: 10px 13px; font-size: 12px; }
+      .hero { min-height: clamp(600px, 86vw, 760px); padding-block: 24px 36px; }
+      .hero-copy { padding-left: 0; }
+      .category-ribbon { max-width: 76%; padding: 10px 14px; font-size: 11px; }
+      .tagline { max-width: 53%; margin: 22px 0; font-size: clamp(24px, 4vw, 32px); }
+      .hero-photo { width: 61%; height: 96%; top: 2%; right: 0; }
+      .benefits { width: min(570px, 76%); gap: 8px; }
+      .benefit { min-height: 108px; padding-inline: 5px; font-size: 11px; }
+      .benefit svg { width: 36px; height: 36px; }
+      .cta-block { width: min(500px, 72%); margin: 24px 0 0; }
+      .menu-link { min-height: 68px; gap: 18px; font-size: 22px; }
+      .site-footer { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 16px; }
+      .footer-item + .footer-item { padding-left: 14px; }
+      .footer-item:nth-child(2) { border-left: 1px solid #efd4af; }
+      .socials { grid-column: 1 / -1; justify-content: center; }
+    }
+    /* Phones */
+    @media (max-width: 560px) {
+      .site-shell { width: min(calc(100% - 28px), 460px); }
+      .site-header { min-height: 88px; gap: 8px; }
+      .brand { gap: 7px; }
+      .brand-mark { width: 58px; height: 58px; }
+      .brand-name strong { font-size: 18px; }
+      .address-pill { gap: 6px; max-width: 48%; padding: 8px 10px; font-size: 10px; line-height: 1.2; }
+      .address-pill svg { width: 18px; height: 18px; }
+      .hero { min-height: 0; display: flex; flex-direction: column; align-items: stretch; padding: 26px 0 22px; }
+      .hero::before { width: 64%; height: 310px; left: 34%; top: 66px; }
+      .hero-copy { width: 100%; padding: 0; }
+      .category-ribbon { display: block; width: fit-content; max-width: 100%; padding: 9px 12px; font-size: 10px; line-height: 1.45; transform: rotate(-1deg); }
+      .tagline { max-width: 100%; margin: 18px 0 14px; font-size: clamp(22px, 6vw, 28px); line-height: 1.22; }
+      .hero-photo { position: relative; top: auto; right: auto; width: calc(100% + 28px); height: clamp(220px, 68vw, 310px); margin: 0 -14px 14px; opacity: 1; -webkit-mask-image: linear-gradient(180deg, #000 78%, transparent 100%); mask-image: linear-gradient(180deg, #000 78%, transparent 100%); }
+      .hero-photo::after { background: linear-gradient(180deg, transparent 54%, var(--cream) 100%); }
+      .hero-photo img { object-position: 68% center; }
+      .benefits { width: 100%; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
+      .benefit { min-height: 94px; gap: 6px; padding: 10px 7px; border-radius: 18px; font-size: 12px; }
+      .benefit svg { width: 34px; height: 34px; }
+      .cta-block { width: 100%; margin: 20px 0 0; }
+      .menu-link { min-height: 62px; gap: 13px; padding: 13px 15px; font-size: 18px; }
+      .menu-link svg { width: 25px; height: 25px; }
+      .redirect-note { font-size: 12px; }
+      .promotions { padding: 30px 0 44px; }
+      .promotions-heading { margin-bottom: 20px; }
+      .promotions-heading h2 { font-size: 36px; }
+      .promotions-heading > p:last-child { font-size: 14px; line-height: 1.45; }
+      .promotion-grid { grid-template-columns: 1fr; gap: 12px; }
+      .promotion-card { min-height: 290px; padding: 18px; border-radius: 23px; }
+      .promo-day { font-size: 11px; }
+      .promo-copy h3 { font-size: 26px; }
+      .site-footer { grid-template-columns: 1fr; gap: 0; padding: 4px 3px 20px; }
+      .footer-item { padding: 13px 0; }
+      .footer-item + .footer-item, .footer-item:nth-child(2) { border-left: 0; border-top: 1px solid #efd4af; padding-left: 0; }
+      .socials { grid-column: auto; justify-content: flex-start; padding: 13px 0 4px; }
+    }
+    @media (max-width: 380px) {
+      .site-shell { width: calc(100% - 24px); }
+      .site-header { min-height: 80px; }
+      .brand-mark { width: 50px; height: 50px; }
+      .brand-name strong { font-size: 16px; }
+      .address-pill { padding: 8px; }
+      .address-pill span { display: none; }
+      .category-ribbon { font-size: 9px; }
+      .menu-link { gap: 9px; padding-inline: 12px; font-size: 16px; }
+    }
+    @media (max-height: 720px) and (min-width: 901px) {
+      .hero { min-height: min(82vh, 760px); }
+      .site-header { min-height: 116px; }
+      .hero-copy { padding-block: 8px 18px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="site-shell">
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="Большой Джон — на главную">
+        <img class="brand-mark" src="logo.png" alt="">
+        <span class="brand-name"><strong>Большой<br>Джон</strong></span>
+        
+      </a>
+      <a class="address-pill" href="https://yandex.ru/maps/?text=%D0%94%D0%BE%D0%BD%D0%B5%D1%86%D0%BA%2C%20%D1%83%D0%BB.%2050-%D0%BB%D0%B5%D1%82%D0%B8%D1%8F%20%D0%A1%D0%A1%D0%A1%D0%A0%2C%20144%2F3" target="_blank" rel="noopener noreferrer" aria-label="Адрес: Донецк, улица 50-летия СССР, 144/3">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z" fill="currentColor"/><circle cx="12" cy="10" r="2.6" fill="#fff"/></svg>
+        <span>Донецк, ул. 50-летия СССР, 144/3</span>
+      </a>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <div class="category-ribbon">ПИЦЦА · ШАУРМА · СУШИ · РОЛЛЫ · ПИВНЫЕ ЗАКУСКИ · ПАСТА</div>
+          <p id="hero-title" class="tagline">Вкусная еда для хороших людей в Донецке <span class="heart" aria-hidden="true">♥</span></p>
+          <div class="hero-photo"><img src="pizza-hero.webp" alt="Горячая пицца с сыром, томатами и свежим базиликом" fetchpriority="high"></div>
+          <div class="benefits" aria-label="Наши преимущества">
+            <div class="benefit">
+              <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="13" cy="36" r="5"/><circle cx="36" cy="36" r="5"/><path d="M8 21h22l7 8v7H18M14 21l4-9h8l4 9M24 12V7h6M28 7h7M11 27h4M24 21v10M21 27h7"/></svg>
+              <span>Быстрая<br>доставка</span>
+            </div>
+            <div class="benefit">
+              <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M10 17h28l3 25H7l3-25Z"/><path d="M17 18v-5a7 7 0 0 1 14 0v5M19 27v3m10-3v3"/></svg>
+              <span>Удобный<br>самовывоз</span>
+            </div>
+            <div class="benefit">
+              <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M14 29a9 9 0 1 1 4-17 8 8 0 0 1 14 1 8 8 0 0 1 3 16v7H14v-7Z"/><path d="M19 36v5h15v-5M23 22v7m8-7v7"/></svg>
+              <span>Свежие<br>ингредиенты</span>
+            </div>
+            <div class="benefit">
+              <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 40 8 25C-1 14 13 4 24 16 35 4 49 14 40 25L24 40Z"/></svg>
+              <span>Любимые<br>вкусы</span>
+            </div>
+          </div>
+          <div class="cta-block">
+            <a class="menu-link" href="https://bigjohn.mypwa.ru/pwa#/shop-menu">
+              <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M3 5h4l3.2 16.2h15.3L29 10H9" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="26" r="1.8"/><circle cx="24" cy="26" r="1.8"/></svg>
+              <span>Заказать доставку</span>
+              <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 16h21m-8-8 8 8-8 8" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <p class="redirect-note">Вы будете перенаправлены в наше приложение MyPWA</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="promotions site-shell" aria-labelledby="promotions-title">
+        <div class="promotions-heading"><p class="eyebrow">Выгодные дни в Большом Джоне</p><h2 id="promotions-title">Акции зала</h2><p>Любимые блюда и поводы собраться — на каждый день недели.</p></div>
+        <div class="promotion-grid">
+          <article class="promotion-card monday"><div class="promo-top"><span class="promo-day">Каждый понедельник</span><span class="promo-mark">Сет дня</span></div><img class="promo-image" src="promo-monday.jpg" alt="Сет закусок с курицей, картофелем и соусами" loading="lazy"><div class="promo-copy"><p class="promo-kicker">Понедельник · День сета</p><h3>Сет «Малыш»</h3><p>Минус 20% на набор, чтобы начать неделю вкусно.</p><div class="promo-price"><del>2 500 ₽</del><strong>2 000 ₽</strong></div></div></article>
+          <article class="promotion-card tuesday"><div class="promo-top"><span class="promo-day">Каждый вторник</span><span class="promo-mark">День суши</span></div><img class="promo-image" src="promo-tuesday.jpg" alt="Большой сет из роллов на деревянной доске" loading="lazy"><div class="promo-copy"><p class="promo-kicker">Вторник · День суши</p><h3>Сет «Аркадия»</h3><p>Метр роллов — отличный повод устроить общий ужин.</p><div class="promo-price"><del>2 350 ₽</del><strong>1 500 ₽</strong></div></div></article>
+          <article class="promotion-card wednesday"><div class="promo-top"><span class="promo-day">Каждую среду</span><span class="promo-mark">День пива</span></div><img class="promo-image" src="promo-wednesday.jpg" alt="Три бокала золотистого пива" loading="lazy"><div class="promo-copy"><p class="promo-kicker">Среда · День пива</p><h3>3 по цене 2</h3><p>При покупке двух бокалов третий — в подарок.</p><div class="promo-price"><strong>Третий бокал бесплатно</strong></div></div></article>
+          <article class="promotion-card thursday"><div class="promo-top"><span class="promo-day">Каждый четверг</span><span class="promo-mark">День крылышек</span></div><img class="promo-image" src="promo-thursday.jpg" alt="Запечённые куриные крылышки в глазури" loading="lazy"><div class="promo-copy"><p class="promo-kicker">Четверг · День крылышек</p><h3>3 по цене 2</h3><p>При покупке двух порций третья — в подарок.</p><div class="promo-price"><strong>Третья порция бесплатно</strong></div></div></article>
+        </div><p class="promo-footnote">Подробности и наличие уточняйте при заказе.</p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-item">
+        <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M33 16c0 9-13 21-13 21S7 25 7 16a13 13 0 1 1 26 0Z" fill="currentColor" stroke="none"/><circle cx="20" cy="16" r="4" fill="#fff" stroke="none"/></svg>
+        <div><strong>Донецк</strong><span>ул. 50-летия СССР, 144/3</span></div>
+      </div>
+      <div class="footer-item hours-item"><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="15"/><path d="M20 11v10l7 4"/></svg><div><strong>Ежедневно</strong><span>10:00–19:45 · без выходных</span></div></div>
+      <div class="footer-item">
+        <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M8 5h7l4 9-5 4c2 5 5 8 10 10l4-5 9 4v7c0 2-2 4-5 4C18 36 4 22 4 9c0-2 2-4 4-4Z"/></svg>
+        <div><a class="phone" href="tel:+79493343277">+7 (949) 334-32-77</a><span>Звоните или пишите</span></div>
+      </div>
+      <nav class="socials" aria-label="Мы в соцсетях">
+        <a class="social-link" href="https://t.me/bolshoyjohn" target="_blank" rel="noopener noreferrer" aria-label="Большой Джон в Telegram">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.5 4.6 18.3 20c-.2 1.1-.9 1.3-1.8.8l-5-3.7-2.4 2.3c-.3.3-.6.6-1.2.6l.4-5.2 9.5-8.6c.4-.4-.1-.6-.6-.2L5.5 13.4.5 11.8c-1.1-.3-1.1-1.1.2-1.6L20.1 2.7c.9-.3 1.7.2 1.4 1.9Z"/></svg>
+        </a>
+        <a class="social-link vk" href="https://vk.com/" target="_blank" rel="noopener noreferrer" aria-label="ВКонтакте">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.6 7.1c.1-.4 0-.7-.6-.7h-2.2c-.5 0-.7.2-.8.6 0 0-1.1 2.6-2.7 4.3-.5.5-.7.7-1 .7-.1 0-.3-.2-.3-.6V7.1c0-.5-.1-.7-.5-.7H10c-.3 0-.5.2-.5.5 0 .5.7.6.8 1.9v2.9c0 .6-.1.7-.4.7-.8 0-2.6-2.7-3.7-5.8-.2-.6-.4-.8-.9-.8H3.1c-.5 0-.6.2-.6.6 0 .6.8 3.4 3.8 7.1 2 2.6 4.8 4 7.4 4 1.6 0 1.8-.3 1.8-.8v-1.9c0-.5.1-.6.5-.6.3 0 .8.1 2.2 1.5 1.6 1.6 1.9 2.3 2.8 2.3h2.2c.5 0 .8-.3.6-.8-.2-.5-.7-1.2-1.5-2.1-.4-.5-1.1-1.1-1.3-1.4-.3-.4-.2-.5 0-.9 0 0 2.9-4.1 3.2-5.7Z"/></svg>
+        </a>
+        <a class="social-link instagram" href="https://www.instagram.com/bolshoyjohn/" target="_blank" rel="noopener noreferrer" aria-label="Большой Джон в Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2.2A2.8 2.8 0 0 0 4.2 7v10A2.8 2.8 0 0 0 7 19.8h10a2.8 2.8 0 0 0 2.8-2.8V7A2.8 2.8 0 0 0 17 4.2H7Zm5 3.1a4.7 4.7 0 1 1 0 9.4 4.7 4.7 0 0 1 0-9.4Zm0 2.2a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Zm5.1-3.7a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2Z"/></svg>
+        </a>
+      </nav>
+    </footer>
+    <div class="copyright">© Большой Джон</div>
+  </div>
+
+  <div id="mypwa-mobile-widget" data-base-url="https://bigjohn.mypwa.ru/pwa" data-path="#/" data-redirect-url="https://bigjohn.mypwa.ru/pwa" data-button-icon="🛒" data-button-text-open="Открыть меню" data-button-text-close="Закрыть" data-button-color="#f7ce4a" data-badge-text="Акция" data-initial-mode="tablet" data-shop-id="shop_123"></div>
+  <script src="https://bigjohn.mypwa.ru/widget-chat.js" async></script>
+</body>
+</html>
